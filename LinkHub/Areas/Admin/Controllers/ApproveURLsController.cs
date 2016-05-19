@@ -17,7 +17,7 @@ namespace LinkHub.Areas.Admin.Controllers
             
             if (status == null)
             {
-                var urls = objBs.urlBs.GetAll().Where(p => p.IsApproved == "P").ToList();
+                var urls = objBs.urlBs.GetAll().Where(p => p.IsApproved == "P").ToList(); //Status pending
                 return View(urls);
             }
             else
