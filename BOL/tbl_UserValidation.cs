@@ -19,11 +19,14 @@ namespace BOL
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
             {
                 LinkHubDbEntities db = new LinkHubDbEntities();
-                string urlValue = value.ToString();
-                int count = db.tbl_User.Where(p => p.UserEmail == urlValue).ToList().Count;
-                if (count != 0)
+                if (value != null)
                 {
-                    return new ValidationResult("Email Already Exist");
+                    string urlValue = value.ToString();
+                    int count = db.tbl_User.Where(p => p.UserEmail == urlValue).ToList().Count;
+                    if (count != 0)
+                    {
+                        return new ValidationResult("Email Already Exist");
+                    }
                 }
                 return ValidationResult.Success;
             }
