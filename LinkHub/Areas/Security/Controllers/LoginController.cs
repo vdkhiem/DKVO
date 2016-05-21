@@ -22,22 +22,26 @@ namespace LinkHub.Areas.Security.Controllers
         {
             try
             {
-                if (Membership.ValidateUser(user.UserEmail, user.Password))
-                {
-                    FormsAuthentication.SetAuthCookie(user.UserEmail, false); //Remember me
-                    return RedirectToAction("Index", "Home", new { area = "Common" });
-                }
-                else
-                {
-                    TempData["Msg"] = "Login Failed";
-                    return RedirectToAction("Inde");
-                }
-                
+                //if (ModelState.IsValid)
+                //{
+                    if (Membership.ValidateUser(user.UserEmail, user.Password))
+                    {
+                        FormsAuthentication.SetAuthCookie(user.UserEmail, false); //Remember me
+                        return RedirectToAction("Index", "Home", new { area = "Common" });
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "Login Failed";
+                        return RedirectToAction("Index");
+                    }
+                //}
+
+                //return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 TempData["Msg"] = "Login Failed: " + ex.Message;
-                return RedirectToAction("Inde");
+                return RedirectToAction("Index");
             }
                     
         }

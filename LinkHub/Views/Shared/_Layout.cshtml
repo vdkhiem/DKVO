@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Vo Duy Khiem</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,7 +38,7 @@
                         {
                             <li>@Html.ActionLink("SubmitURL", "Index", new { Controller = "URL", Area = "User" })</li>
                             <li>@Html.ActionLink("SignOut", "SignOut", new { Controller = "Login", Area = "Security" })</li>
-                            <li><a href="#">Welcome Mr/Ms @User.Identity.Name</a></li>    
+                            <li><a href="#">Welcome Mr/Ms @User.Identity.Name</a></li>
                         }
                     }
                     else
@@ -56,7 +56,11 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <blockquote class="blockquote-reverse">
+                <p>My saying goes here....</p>
+                <small>By Me.. <cite title="Source Title">Source Title</cite>[MCP]</small>
+            </blockquote>
+            <p>&copy; @DateTime.Now.Year - Linkhub using Asp.NET MVC and Entity Framework</p>
         </footer>
     </div>
 
