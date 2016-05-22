@@ -107,7 +107,7 @@
     <Content Include="Areas\Security\Views\Register\Index.cshtml" />
     <Content Include="Areas\Common\Views\BrowseURLs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
-    <None Include="Properties\PublishProfiles\dkvoapp - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\khiem - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
