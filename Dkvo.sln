@@ -11,6 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{C8CDBA31-7CC4-4BFE-842E-C5A6C49DFC4B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{D723DE44-CE83-4DB0-8227-B84CEE65F79E}"
+	ProjectSection(SolutionItems) = preProject
+		Database\TheLinkHubDb.sql = Database\TheLinkHubDb.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{B0821DB6-2A14-4861-81C3-27D649707B9E}"
+	ProjectSection(SolutionItems) = preProject
+		Documents\SqlServerNamingConvention.docx = Documents\SqlServerNamingConvention.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
