@@ -14,7 +14,7 @@ namespace LinkHub.Areas.Admin.Controllers
         public ActionResult Index(string status)
         {
             ViewBag.Status = (status == null ? "P" : status);  //Store to viewbag to bold the link
-            
+
             if (status == null)
             {
                 var urls = objBs.urlBs.GetAll().Where(p => p.IsApproved == "P").ToList(); //Status pending
@@ -72,6 +72,24 @@ namespace LinkHub.Areas.Admin.Controllers
             {
                 TempData["Msg"] = "Rejected Failed: " + ex.Message;
                 return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ApproveOrRejectAll(List<int> Ids, string Status, string CurrentStatus)
+        {
+            try
+            {
+                objBs.ApproveOrReject(Ids, Status);
+                TempData["Msg"] = "Rejected Successfully";
+                var urls = objBs.urlBs.GetAll().Where(x => x.IsApproved == CurrentStatus).ToList();
+                return PartialView("pv_ApproveURLs", urls);
+            }
+            catch (Exception ex)
+            {
+                TempData["Msg"] = "Rejected Failed: " + ex.Message;
+                var urls = objBs.urlBs.GetAll().Where(x => x.IsApproved == CurrentStatus).ToList();
+                return PartialView("pv_ApproveURLs", urls);
             }
         }
 
