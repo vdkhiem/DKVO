@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{D723DE44-CE83-4DB0-8227-B84CEE65F79E}"
 	ProjectSection(SolutionItems) = preProject
+		Database\TestDB.sql = Database\TestDB.sql
 		Database\TheLinkHubDb.sql = Database\TheLinkHubDb.sql
 	EndProjectSection
 EndProject
