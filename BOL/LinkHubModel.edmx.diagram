@@ -10,7 +10,12 @@
         <EntityTypeShape EntityType="LinkHubDbModel.tbl_User" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="LinkHubDbModel.FK_tbl_Url_tbl_Category" ManuallyRouted="false" />
         <AssociationConnector Association="LinkHubDbModel.FK_tbl_Url_tbl_User" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="LinkHubDbModel.AppMenu" Width="1.5" PointX="3.375" PointY="5.375" />
+        <EntityTypeShape EntityType="LinkHubDbModel.Menu" Width="1.5" PointX="5.625" PointY="5" />
+        <EntityTypeShape EntityType="LinkHubDbModel.User" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="LinkHubDbModel.UserAccess" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="LinkHubDbModel.FK_Menu_AppMenu" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

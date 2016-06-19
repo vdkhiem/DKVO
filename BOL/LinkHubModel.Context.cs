@@ -28,5 +28,9 @@ namespace BOL
         public virtual DbSet<tbl_Category> tbl_Category { get; set; }
         public virtual DbSet<tbl_Url> tbl_Url { get; set; }
         public virtual DbSet<tbl_User> tbl_User { get; set; }
+        public virtual DbSet<AppMenu> AppMenus { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserAccess> UserAccesses { get; set; }
     }
 }

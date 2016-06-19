@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppMenu.cs">
+      <DependentUpon>LinkHubModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LinkHubModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -63,6 +66,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LinkHubModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Menu.cs">
+      <DependentUpon>LinkHubModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickURLSubmitModel.cs" />
     <Compile Include="tbl_Category.cs">
@@ -77,6 +83,12 @@
       <DependentUpon>LinkHubModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_UserValidation.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>LinkHubModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccess.cs">
+      <DependentUpon>LinkHubModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="LinkHubModel.edmx">

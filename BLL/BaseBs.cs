@@ -11,11 +11,13 @@ namespace BLL
         public CategoryBs categoryBs { get; set; }
         public UserBs userBs { get; set; }
         public UrlBs urlBs { get; set; }
+        public MenuBs menuBs { get; set; }
         public BaseBs ()
         {
             categoryBs = new CategoryBs();
             userBs = new UserBs();
             urlBs = new UrlBs();
+            menuBs = new MenuBs();
         }
     }
 }

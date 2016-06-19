@@ -4,7 +4,69 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LinkHubDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LinkHubDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppMenu">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="int" Nullable="false" />
+          <Property Name="AppName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Display" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="AppID" Type="int" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="MenuName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BaseParentId" Type="int" />
+          <Property Name="ImmParentId" Type="int" />
+          <Property Name="Access" Type="varchar" MaxLength="5" />
+          <Property Name="Path" Type="varchar" MaxLength="500" />
+          <Property Name="Display" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="EndNode" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LinkHubDb.Connection.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="MachineId" />
+            <PropertyRef Name="DateStamp" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="locked" />
+            <PropertyRef Name="deleted" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MachineId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateStamp" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="locked" Type="bit" Nullable="false" />
+          <Property Name="deleted" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="AddedBy" Type="varchar" MaxLength="25" />
+          <Property Name="UserDept" Type="varchar" MaxLength="10" />
+          <Property Name="HomeDirectory" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserAccess">
+          <Key>
+            <PropertyRef Name="AppId" />
+            <PropertyRef Name="MenuId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DateStamp" />
+          </Key>
+          <Property Name="AppId" Type="int" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccessRights" Type="varchar" MaxLength="6" />
+          <Property Name="DateStamp" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -34,6 +96,18 @@
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Menu_AppMenu">
+          <End Role="AppMenu" Type="Self.AppMenu" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppMenu">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbl_Url_tbl_Category">
           <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
           <End Role="tbl_Url" Type="Self.tbl_Url" Multiplicity="*" />
@@ -59,9 +133,38 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LinkHubDbModelStoreContainer">
+          <EntitySet Name="AppMenu" EntityType="Self.AppMenu" Schema="Connection" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="Connection" store:Type="Tables" />
           <EntitySet Name="tbl_Category" EntityType="Self.tbl_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Url" EntityType="Self.tbl_Url" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="Connection">
+            <DefiningQuery>SELECT 
+    [User].[UserId] AS [UserId], 
+    [User].[Name] AS [Name], 
+    [User].[MachineId] AS [MachineId], 
+    [User].[DateStamp] AS [DateStamp], 
+    [User].[Email] AS [Email], 
+    [User].[locked] AS [locked], 
+    [User].[deleted] AS [deleted], 
+    [User].[AddedBy] AS [AddedBy], 
+    [User].[UserDept] AS [UserDept], 
+    [User].[HomeDirectory] AS [HomeDirectory]
+    FROM [Connection].[User] AS [User]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserAccess" EntityType="Self.UserAccess" store:Type="Tables" store:Schema="Connection">
+            <DefiningQuery>SELECT 
+    [UserAccess].[AppId] AS [AppId], 
+    [UserAccess].[MenuId] AS [MenuId], 
+    [UserAccess].[UserId] AS [UserId], 
+    [UserAccess].[AccessRights] AS [AccessRights], 
+    [UserAccess].[DateStamp] AS [DateStamp]
+    FROM [Connection].[UserAccess] AS [UserAccess]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Menu_AppMenu" Association="Self.FK_Menu_AppMenu">
+            <End Role="AppMenu" EntitySet="AppMenu" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
           <AssociationSet Name="FK_tbl_Url_tbl_Category" Association="Self.FK_tbl_Url_tbl_Category">
             <End Role="tbl_Category" EntitySet="tbl_Category" />
             <End Role="tbl_Url" EntitySet="tbl_Url" />
@@ -71,8 +174,7 @@
             <End Role="tbl_Url" EntitySet="tbl_Url" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LinkHubDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -145,7 +247,87 @@
             <End Role="tbl_User" EntitySet="tbl_User" />
             <End Role="tbl_Url" EntitySet="tbl_Url" />
           </AssociationSet>
+          <EntitySet Name="AppMenus" EntityType="LinkHubDbModel.AppMenu" />
+          <EntitySet Name="Menus" EntityType="LinkHubDbModel.Menu" />
+          <EntitySet Name="Users" EntityType="LinkHubDbModel.User" />
+          <EntitySet Name="UserAccesses" EntityType="LinkHubDbModel.UserAccess" />
+          <AssociationSet Name="FK_Menu_AppMenu" Association="LinkHubDbModel.FK_Menu_AppMenu">
+            <End Role="AppMenu" EntitySet="AppMenus" />
+            <End Role="Menu" EntitySet="Menus" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AppMenu">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="Int32" Nullable="false" />
+          <Property Name="AppName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Display" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menus" Relationship="LinkHubDbModel.FK_Menu_AppMenu" FromRole="AppMenu" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="AppID" Type="Int32" Nullable="false" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BaseParentId" Type="Int32" />
+          <Property Name="ImmParentId" Type="Int32" />
+          <Property Name="Access" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Display" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="EndNode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="AppMenu" Relationship="LinkHubDbModel.FK_Menu_AppMenu" FromRole="Menu" ToRole="AppMenu" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="MachineId" />
+            <PropertyRef Name="DateStamp" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="locked" />
+            <PropertyRef Name="deleted" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MachineId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="locked" Type="Boolean" Nullable="false" />
+          <Property Name="deleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="AddedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserDept" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HomeDirectory" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserAccess">
+          <Key>
+            <PropertyRef Name="AppId" />
+            <PropertyRef Name="MenuId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DateStamp" />
+          </Key>
+          <Property Name="AppId" Type="Int32" Nullable="false" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessRights" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="DateStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Menu_AppMenu">
+          <End Type="LinkHubDbModel.AppMenu" Role="AppMenu" Multiplicity="1" />
+          <End Type="LinkHubDbModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppMenu">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -184,7 +366,60 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="AppMenus">
+            <EntityTypeMapping TypeName="LinkHubDbModel.AppMenu">
+              <MappingFragment StoreEntitySet="AppMenu">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="LinkHubDbModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="EndNode" ColumnName="EndNode" />
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="ImmParentId" ColumnName="ImmParentId" />
+                <ScalarProperty Name="BaseParentId" ColumnName="BaseParentId" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="AppID" ColumnName="AppID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LinkHubDbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="HomeDirectory" ColumnName="HomeDirectory" />
+                <ScalarProperty Name="UserDept" ColumnName="UserDept" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="locked" ColumnName="locked" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+                <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccesses">
+            <EntityTypeMapping TypeName="LinkHubDbModel.UserAccess">
+              <MappingFragment StoreEntitySet="UserAccess">
+                <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+                <ScalarProperty Name="AccessRights" ColumnName="AccessRights" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
