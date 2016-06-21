@@ -120,12 +120,10 @@
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Templates\Admin\Department\Department.html" />
-    <Content Include="Templates\Admin\Department\department.js" />
-    <Content Include="Templates\Admin\Employee\Employee.html" />
-    <Content Include="Templates\Admin\Employee\employee.js" />
     <Content Include="Templates\Admin\ManageMenu.html" />
     <Content Include="Templates\Admin\ManageMenu.js" />
+    <Content Include="Templates\Common\Login.html" />
+    <Content Include="Templates\Common\Login.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -156,7 +154,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Templates\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

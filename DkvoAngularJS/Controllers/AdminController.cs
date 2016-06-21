@@ -69,5 +69,18 @@ namespace DkvoAngularJS.Controllers
 
             return Content(list, "application/json");
         }
+
+        [HttpPost]
+        public ActionResult Login(User user)
+        {
+            
+            return null;
+        }
+    }
+
+    public class User
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -26,6 +26,10 @@ kvApp.config(function ($routeProvider) {
         templateUrl: "paris.htm",
         controller: "parisCtrl"
     })
+    .when("/Login", {
+        templateUrl: "Templates/Common/Login.html",
+        controller: "loginController"
+    })
     .otherwise({
         template: "<h1>Welcome to rubic 2016</h1>",
         controller: "homeCtroller"
