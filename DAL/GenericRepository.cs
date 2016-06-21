@@ -55,5 +55,12 @@ namespace DAL
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
         }
+
+        public virtual IQueryable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        {
+
+            IQueryable<TEntity> query = context.Set<TEntity>().Where(predicate);
+            return query;
+        }
     }
 }
