@@ -62,6 +62,10 @@
       <Project>{c8cdba31-7cc4-4bfe-842e-c5a6c49dfc4b}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{f10d4ab3-844f-4e89-8ef4-faa8f2723e96}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="DiagramBs.cd" />

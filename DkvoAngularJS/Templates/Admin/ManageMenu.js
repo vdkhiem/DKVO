@@ -1,7 +1,7 @@
-﻿kvApp.controller("londonCtrl", function ($scope, $http) {
+﻿kvApp.controller("londonCtrl", function ($scope, $http) {    
     $scope.msg = "I love London";
-    $http({ method: 'Get', url: 'Departments/GetDepartments' })
+    $http({ method: 'Get', url: 'Admin/GetMenus' })
             .then(function (response) {
-                $scope.depts = response.data;
+                $scope.menus = response.data;
             });
 });

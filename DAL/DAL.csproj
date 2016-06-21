@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppMenuDb.cs" />
     <Compile Include="CategoryDb.cs" />
+    <Compile Include="GenericRepository.cs" />
     <Compile Include="MenuDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrlDb.cs" />

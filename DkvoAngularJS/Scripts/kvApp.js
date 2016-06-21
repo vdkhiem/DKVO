@@ -3,10 +3,13 @@
 kvApp.controller("homeController", function ($scope, $http) {
     $scope.msg = "Welcome Dkvo";
     $http({ method: 'Get', url: 'Admin/GetAppMenus' })
-            .then(function (response) {
-                alert(response.data);
-                $scope.appMenus = response.data;
-            });
+        .then(function (response) {            
+            $scope.appMenus = response.data;
+        });
+
+    $scope.isBaseParentId = function (menu) {        
+        return menu.BaseParentId == null;
+    };
 
 });
 
@@ -24,10 +27,12 @@ kvApp.config(function ($routeProvider) {
         controller: "parisCtrl"
     })
     .otherwise({
-        template: "<h1>None</h1><p>Nothing has been selected,</p>",
+        template: "<h1>Welcome to rubic 2016</h1>",
         controller: "homeCtroller"
     });
 });
+
+
 
 
 

@@ -1,5 +1,6 @@
 ﻿using BOL;
 using DAL;
+using Framework.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,27 +12,49 @@ namespace BLL
     public class MenuBs
     {
         private MenuDb objDb;
-        private AppMenuDb objAppMenuDb;
+        private GenericRepository<AppMenu> objAppMenuDb;
+
+        #region Constructor
+
         public MenuBs()
         {
             objDb = new MenuDb();
-            objAppMenuDb = new AppMenuDb();
+            objAppMenuDb = new GenericRepository<AppMenu>();
         }
 
+        #endregion 
+
         #region Menu
-		
+
         /// <summary>
         /// Get all Menus
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Menu> GetAll()
-        {
-            return objDb.GetAll();
+        {    
+            try
+            {
+                return objDb.GetAll();
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
+            
         }
 
         public IEnumerable<Menu> GetByAppID(int appId)
         {
-            return objDb.GetByAppID(appId);
+            try
+            {
+                return objDb.GetByAppID(appId);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
         }
 
 
@@ -42,7 +65,15 @@ namespace BLL
         /// <returns></returns>
         public Menu GetByID(int id)
         {
-            return objDb.GetByID(id);
+            try
+            {
+                return objDb.GetByID(id);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }            
         }
 
         /// <summary>
@@ -82,7 +113,15 @@ namespace BLL
         /// <returns></returns>
         public IEnumerable<AppMenu> GetAppMenuAll()
         {
-            return objAppMenuDb.GetAll();
+            try
+            {
+                return objAppMenuDb.GetAll();
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -92,7 +131,15 @@ namespace BLL
         /// <returns></returns>
         public AppMenu GetAppMenuByID(int id)
         {
-            return objAppMenuDb.GetByID(id);
+            try
+            {
+                return objAppMenuDb.GetByID(id);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -101,7 +148,16 @@ namespace BLL
         /// <param name="item"></param>
         public void InsertAppMenu(AppMenu item)
         {
-            objAppMenuDb.Insert(item);
+            try
+            {
+                objAppMenuDb.Insert(item);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
+            
         }
 
         /// <summary>
@@ -110,7 +166,16 @@ namespace BLL
         /// <param name="id"></param>
         public void DeleteAppMenu(int id)
         {
-            objAppMenuDb.Delete(id);
+            try
+            {
+                objAppMenuDb.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
+            
         }
 
         /// <summary>
@@ -119,11 +184,18 @@ namespace BLL
         /// <param name="User"></param>
         public void UpdateAppMenu(AppMenu item)
         {
-            objAppMenuDb.Update(item);
+            try
+            {
+                objAppMenuDb.Update(item);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
         }
 
         #endregion
-
 
     }
 }

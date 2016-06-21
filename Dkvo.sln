@@ -19,10 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{D7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{B0821DB6-2A14-4861-81C3-27D649707B9E}"
 	ProjectSection(SolutionItems) = preProject
+		Documents\ErrorNote.docx = Documents\ErrorNote.docx
 		Documents\SqlServerNamingConvention.docx = Documents\SqlServerNamingConvention.docx
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DkvoAngularJS", "DkvoAngularJS\DkvoAngularJS.csproj", "{CE837002-32B3-4875-ADF4-76FC36A828E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +53,10 @@ Global
 		{CE837002-32B3-4875-ADF4-76FC36A828E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE837002-32B3-4875-ADF4-76FC36A828E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE837002-32B3-4875-ADF4-76FC36A828E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

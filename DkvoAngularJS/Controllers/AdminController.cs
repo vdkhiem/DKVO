@@ -1,4 +1,7 @@
 ﻿using BLL;
+using BOL;
+using Framework.Shared;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +21,24 @@ namespace DkvoAngularJS.Controllers
 
         public ActionResult GetAppMenus()
         {
-            var items = objBs.menuBs.GetAppMenuAll().OrderBy(x => x.SortOrder).ToList();
-            return Json(items, JsonRequestBehavior.AllowGet);
+            try
+            {   
+                var items = objBs.menuBs.GetAppMenuAll().OrderBy(x => x.SortOrder).ToList();
+                var list = JsonConvert.SerializeObject(items,
+                Formatting.None,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                });
+
+                return Content(list, "application/json");
+                //return Json(items, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }
         }
 
         public ActionResult GetMenusByAppId(string appId)
@@ -30,7 +49,25 @@ namespace DkvoAngularJS.Controllers
 
         public ActionResult GetMenus()
         {
-            return Json(objBs.menuBs.GetAll().ToList(), JsonRequestBehavior.AllowGet);
+            IEnumerable<Menu> items;
+            try
+            {
+                items = objBs.menuBs.GetAll().ToList();
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogException(ex.Message, ex);
+                throw ex;
+            }            
+
+            var list = JsonConvert.SerializeObject(items,
+            Formatting.None,
+            new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            });
+
+            return Content(list, "application/json");
         }
     }
 }
