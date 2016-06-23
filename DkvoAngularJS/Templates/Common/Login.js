@@ -1,10 +1,11 @@
-﻿kvApp.factory('crudServiceLogin', function ($http) {
+﻿kvApp.factory("crudServiceLogin", function ($http) {
     crudObj = {};
 
-    crudEmpObj.login = function (user) {
+    crudObj.login = function (user) {
+        //alert("crudEmpObj.login");
         var User;
 
-        User = $http({ method: 'Post', url: '/Admin/Login/', data: user }).
+        User = $http({ method: 'Post', url: 'Admin/Login', data: user }).
         then(function (response) {
             return response.data;
         });
@@ -16,8 +17,9 @@
 });
 
 kvApp.controller("loginController", function ($scope, crudServiceLogin) {
-
+    //alert("loginController");
     $scope.Login = function (User) {
+        //alert(User);
         crudServiceLogin.login(User).then(function (result) {
             $scope.Msg = result.Email + " Has been login successfully";
         });

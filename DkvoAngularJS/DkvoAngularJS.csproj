@@ -124,6 +124,8 @@
     <Content Include="Templates\Admin\ManageMenu.js" />
     <Content Include="Templates\Common\Login.html" />
     <Content Include="Templates\Common\Login.js" />
+    <Content Include="Templates\Report\ReportExport.html" />
+    <Content Include="Templates\Report\ReportExport.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
