@@ -18,12 +18,24 @@
                 </button>
                 <a class="navbar-brand" href="#">Rubic</a>
             </div>
+            <!--<div ng-controller="loginController">
+                <ul>
+                    <li><a ng-click="SignOut()">Sign Out</a></li>
+                </ul>
+            </div>-->
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Dashboard</a></li>
                     <li><a href="#">Settings</a></li>
-                    <li><a href="#Login">Login</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li ng-if="LoginedUser==null || LoginedUser.IsSignedIn==false"><a href="#Login">Login</a></li>
+                    <li ng-if="LoginedUser==null || LoginedUser.IsSignedIn==false"><a href="#Register">Register</a></li>
+                    <!--<li><a href="#">{{LoginedUser.Email}}</a></li>-->
+                    <li  ng-if="LoginedUser!=null && LoginedUser.IsSignedIn==true" class="dropdown" >
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{LoginedUser.Email}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" ng-controller="logoutController">
+                            <li><a ng-click="SignOut()">Sign Out</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 
                 <!--<form class="navbar-form navbar-right">
@@ -35,11 +47,13 @@
                     </div>
                     <button type="submit" class="btn btn-success">Sign in</button>
                 </form>-->
+                
 
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">
                 </form>
             </div>
+
         </div>
     </nav>
     <div class="container-fluid" ng-controller="homeController">
@@ -94,6 +108,7 @@
 </html>
 <script src="Scripts/angular.min.js"></script>
 <script src="Scripts/angular-route.min.js"></script>
+<script src="Scripts/ngStorage.min.js"></script>
 <script src="Scripts/jquery-1.9.1.min.js"></script>
 <script src="Scripts/bootstrap.min.js"></script>
 <script src="Scripts/kvApp.js"></script>
