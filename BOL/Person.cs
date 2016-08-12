@@ -15,18 +15,16 @@ namespace BOL
 using System;
     using System.Collections.Generic;
     
-public partial class UserAccess
+public partial class Person
 {
 
-    public int AppId { get; set; }
+    public int Id { get; set; }
 
-    public int MenuId { get; set; }
+    public string FirstName { get; set; }
 
-    public string UserId { get; set; }
+    public string LastName { get; set; }
 
-    public string AccessRights { get; set; }
-
-    public System.DateTime DateStamp { get; set; }
+    public Nullable<int> Age { get; set; }
 
 }
 

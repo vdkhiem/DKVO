@@ -33,6 +33,7 @@ namespace DAL
         public virtual void Insert(TEntity entity)
         {
             dbSet.Add(entity);
+            this.context.SaveChanges();
         }
 
         public virtual void Delete(object id)
@@ -48,12 +49,14 @@ namespace DAL
                 dbSet.Attach(entityToDelete);
             }
             dbSet.Remove(entityToDelete);
+            this.context.SaveChanges();
         }
 
         public virtual void Update(TEntity entityToUpdate)
         {
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
+            this.context.SaveChanges();
         }
 
         public virtual IQueryable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)

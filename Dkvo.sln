@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkHub", "LinkHub\LinkHub.csproj", "{7DD2CB0B-ACB5-414E-AF13-0ED5602FEE83}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOL", "BOL\BOL.csproj", "{F2F869E1-330A-4773-B472-5751713A37F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{883BC249-2D53-437D-A3BE-3A825CE069F4}"
@@ -13,8 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{D723DE44-CE83-4DB0-8227-B84CEE65F79E}"
 	ProjectSection(SolutionItems) = preProject
-		Database\TestDB.sql = Database\TestDB.sql
-		Database\TheLinkHubDb.sql = Database\TheLinkHubDb.sql
+		Database\dkvodb.sql = Database\dkvodb.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{B0821DB6-2A14-4861-81C3-27D649707B9E}"
@@ -28,16 +25,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DkvoAngularJS", "DkvoAngula
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DkvoApi", "DkvoApi\DkvoApi.csproj", "{2F039757-51F2-4625-82F7-64F4E954D22D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{06CEE445-6999-456E-8329-F71416A5D4C2}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.txt = ReadMe.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DD2CB0B-ACB5-414E-AF13-0ED5602FEE83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DD2CB0B-ACB5-414E-AF13-0ED5602FEE83}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DD2CB0B-ACB5-414E-AF13-0ED5602FEE83}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DD2CB0B-ACB5-414E-AF13-0ED5602FEE83}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2F869E1-330A-4773-B472-5751713A37F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2F869E1-330A-4773-B472-5751713A37F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2F869E1-330A-4773-B472-5751713A37F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,6 +58,10 @@ Global
 		{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F10D4AB3-844F-4E89-8EF4-FAA8F2723E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F039757-51F2-4625-82F7-64F4E954D22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F039757-51F2-4625-82F7-64F4E954D22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F039757-51F2-4625-82F7-64F4E954D22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F039757-51F2-4625-82F7-64F4E954D22D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

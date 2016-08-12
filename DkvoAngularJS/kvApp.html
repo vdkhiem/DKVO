@@ -25,7 +25,7 @@
             </div>-->
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#/Person">Person</a></li>
                     <li><a href="#">Settings</a></li>
                     <li ng-if="LoginedUser==null || LoginedUser.IsSignedIn==false"><a href="#Login">Login</a></li>
                     <li ng-if="LoginedUser==null || LoginedUser.IsSignedIn==false"><a href="#Register">Register</a></li>
@@ -114,3 +114,4 @@
 <script src="Scripts/kvApp.js"></script>
 <script src="Templates/Admin/ManageMenu.js"></script>
 <script src="Templates/Common/Login.js"></script>
+<script src="Templates/Common/Person.js"></script>

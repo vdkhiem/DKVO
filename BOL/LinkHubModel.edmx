@@ -5,9 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="LinkHubDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dkvodb.Connection.AppMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AppMenu">
           <Key>
             <PropertyRef Name="AppId" />
+            
+            
+            
+            
           </Key>
           <Property Name="AppId" Type="int" Nullable="false" />
           <Property Name="AppName" Type="varchar" MaxLength="50" Nullable="false" />
@@ -15,9 +21,14 @@
           <Property Name="Display" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dkvodb.Connection.Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Menu">
           <Key>
+            
             <PropertyRef Name="MenuId" />
+            
+            
           </Key>
           <Property Name="AppID" Type="int" Nullable="false" />
           <Property Name="MenuId" Type="int" Nullable="false" />
@@ -30,7 +41,7 @@
           <Property Name="EndNode" Type="char" MaxLength="1" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'LinkHubDb.Connection.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'dkvodb.Connection.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -53,7 +64,7 @@ warning 6002: The table/view 'LinkHubDb.Connection.User' does not have a primary
           <Property Name="HomeDirectory" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'dkvodb.Connection.UserAccess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserAccess">
           <Key>
             <PropertyRef Name="AppId" />
@@ -67,6 +78,30 @@ warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a p
           <Property Name="AccessRights" Type="varchar" MaxLength="6" />
           <Property Name="DateStamp" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="AgeGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MinAge" Type="int" />
+          <Property Name="MaxAge" Type="int" />
+          <Property Name="Description" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="text" />
+          <Property Name="LastName" Type="text" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'dkvodb.dbo.sqlite_sequence' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="sqlite_sequence">
+          <Property Name="name" Type="text" />
+          <Property Name="seq" Type="text" />
+        </EntityType>-->
         <EntityType Name="tbl_Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -96,18 +131,6 @@ warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a p
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Menu_AppMenu">
-          <End Role="AppMenu" Type="Self.AppMenu" Multiplicity="1" />
-          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppMenu">
-              <PropertyRef Name="AppId" />
-            </Principal>
-            <Dependent Role="Menu">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tbl_Url_tbl_Category">
           <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
           <End Role="tbl_Url" Type="Self.tbl_Url" Multiplicity="*" />
@@ -133,11 +156,33 @@ warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a p
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LinkHubDbModelStoreContainer">
-          <EntitySet Name="AppMenu" EntityType="Self.AppMenu" Schema="Connection" store:Type="Tables" />
-          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="Connection" store:Type="Tables" />
+          <EntitySet Name="AgeGroup" EntityType="Self.AgeGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Category" EntityType="Self.tbl_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Url" EntityType="Self.tbl_Url" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppMenu" EntityType="Self.AppMenu" store:Type="Tables" store:Schema="Connection">
+            <DefiningQuery>SELECT 
+    [AppMenu].[AppId] AS [AppId], 
+    [AppMenu].[AppName] AS [AppName], 
+    [AppMenu].[Path] AS [Path], 
+    [AppMenu].[Display] AS [Display], 
+    [AppMenu].[SortOrder] AS [SortOrder]
+    FROM [Connection].[AppMenu] AS [AppMenu]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Menu" EntityType="Self.Menu" store:Type="Tables" store:Schema="Connection">
+            <DefiningQuery>SELECT 
+    [Menu].[AppID] AS [AppID], 
+    [Menu].[MenuId] AS [MenuId], 
+    [Menu].[MenuName] AS [MenuName], 
+    [Menu].[BaseParentId] AS [BaseParentId], 
+    [Menu].[ImmParentId] AS [ImmParentId], 
+    [Menu].[Access] AS [Access], 
+    [Menu].[Path] AS [Path], 
+    [Menu].[Display] AS [Display], 
+    [Menu].[EndNode] AS [EndNode]
+    FROM [Connection].[Menu] AS [Menu]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="Connection">
             <DefiningQuery>SELECT 
     [User].[UserId] AS [UserId], 
@@ -161,10 +206,6 @@ warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a p
     [UserAccess].[DateStamp] AS [DateStamp]
     FROM [Connection].[UserAccess] AS [UserAccess]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Menu_AppMenu" Association="Self.FK_Menu_AppMenu">
-            <End Role="AppMenu" EntitySet="AppMenu" />
-            <End Role="Menu" EntitySet="Menu" />
-          </AssociationSet>
           <AssociationSet Name="FK_tbl_Url_tbl_Category" Association="Self.FK_tbl_Url_tbl_Category">
             <End Role="tbl_Category" EntitySet="tbl_Category" />
             <End Role="tbl_Url" EntitySet="tbl_Url" />
@@ -255,6 +296,8 @@ warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a p
             <End Role="AppMenu" EntitySet="AppMenus" />
             <End Role="Menu" EntitySet="Menus" />
           </AssociationSet>
+          <EntitySet Name="AgeGroups" EntityType="LinkHubDbModel.AgeGroup" />
+          <EntitySet Name="People" EntityType="LinkHubDbModel.Person" />
         </EntityContainer>
         <EntityType Name="AppMenu">
           <Key>
@@ -328,6 +371,24 @@ warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AgeGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MinAge" Type="Int32" />
+          <Property Name="MaxAge" Type="Int32" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -416,6 +477,26 @@ warning 6002: The table/view 'LinkHubDb.Connection.UserAccess' does not have a p
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="MenuId" ColumnName="MenuId" />
                 <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgeGroups">
+            <EntityTypeMapping TypeName="LinkHubDbModel.AgeGroup">
+              <MappingFragment StoreEntitySet="AgeGroup">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MaxAge" ColumnName="MaxAge" />
+                <ScalarProperty Name="MinAge" ColumnName="MinAge" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="LinkHubDbModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

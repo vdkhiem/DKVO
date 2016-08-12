@@ -22,6 +22,10 @@ kvApp.config(function ($routeProvider) {
         templateUrl: "Templates/Common/Register.html",
         controller: "loginController"
     })
+    .when("/Person", {
+        templateUrl: "Templates/Common/Person.html",
+        controller: "personController"
+    })
     .otherwise({
         template: "<h1>Welcome to rubic 2016</h1>",
         controller: "homeCtroller"

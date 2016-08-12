@@ -15,6 +15,8 @@
         <EntityTypeShape EntityType="LinkHubDbModel.User" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="LinkHubDbModel.UserAccess" Width="1.5" PointX="7.375" PointY="0.75" />
         <AssociationConnector Association="LinkHubDbModel.FK_Menu_AppMenu" />
+        <EntityTypeShape EntityType="LinkHubDbModel.AgeGroup" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="LinkHubDbModel.Person" Width="1.5" PointX="2.75" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
