@@ -32,8 +32,12 @@ namespace DAL
 
         public virtual void Insert(TEntity entity)
         {
-            dbSet.Add(entity);
-            this.context.SaveChanges();
+            if (entity != null)
+            {
+                dbSet.Add(entity);
+                this.context.SaveChanges();
+            }
+            
         }
 
         public virtual void Delete(object id)
